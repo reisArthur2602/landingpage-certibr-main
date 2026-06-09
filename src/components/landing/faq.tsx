@@ -5,28 +5,44 @@ import { ChevronDown } from 'lucide-react';
 
 const faqs = [
     {
-        question: 'A certiBR emite o certificado digital?',
-        answer: 'Não emitimos o certificado diretamente como autoridade certificadora. A certiBR atua como parceira e intermediadora: orientamos qual é o certificado ideal para o seu caso e fazemos a ponte com autoridades certificadoras autorizadas e credenciadas no padrão ICP-Brasil, que realizam a emissão.',
+        question: 'Qual a diferença entre A1 e A3?',
+        answer: 'O A1 é um arquivo digital instalado no computador, prático para o dia a dia e com validade de 1 ano. O A3 fica armazenado em token ou cartão (mídia física), com mais portabilidade e validade de até 3 anos. Na orientação, ajudamos você a escolher o mais adequado.',
     },
     {
-        question: 'Como funciona a contratação pela certiBR?',
-        answer: 'É simples: você entra em contato pelo WhatsApp, conta sobre o seu negócio e nós indicamos o tipo de certificado mais adequado. Em seguida, intermediamos todo o processo de emissão com um parceiro autorizado e acompanhamos você até o certificado estar pronto para uso.',
+        question: 'Qual certificado serve para emitir nota fiscal?',
+        answer: 'Para emitir notas fiscais eletrônicas (NF-e, NFC-e ou NFS-e) normalmente se usa o e-CNPJ. Dependendo do seu caso, o e-CPF também pode atender. Analisamos a sua operação e indicamos a opção correta antes da compra.',
     },
     {
-        question: 'Qual a diferença entre os modelos A1 e A3?',
-        answer: 'O modelo A1 é um arquivo digital instalado no computador, com validade de 1 ano e muito prático para o dia a dia. O modelo A3 fica armazenado em um token ou cartão, com mais portabilidade e validade de até 3 anos. Durante a orientação, ajudamos você a escolher o ideal.',
+        question: 'Preciso de e-CPF ou e-CNPJ?',
+        answer: 'O e-CNPJ representa a empresa (emitir notas, acessar a Receita/e-CAC e assinar documentos em nome da empresa). O e-CPF representa a pessoa física, ideal para profissionais liberais. Na orientação gratuita, identificamos qual atende você.',
     },
     {
-        question: 'Qual certificado eu preciso: e-CNPJ ou e-CPF?',
-        answer: 'O e-CNPJ é voltado para empresas (assinatura de documentos, emissão de notas fiscais e acesso a portais do governo em nome da empresa). O e-CPF é para pessoas físicas e profissionais. Na orientação gratuita, identificamos qual atende a sua necessidade.',
+        question: 'Vocês são uma Autoridade Certificadora?',
+        answer: 'Não. Atuamos como intermediadora/parceira comercial, auxiliando na escolha, no atendimento e no acompanhamento de todo o processo. A emissão do certificado é feita por parceiros autorizados dentro da cadeia ICP-Brasil.',
     },
     {
-        question: 'Preciso de certificado para emitir nota fiscal?',
-        answer: 'Sim. Para emitir notas fiscais eletrônicas (NF-e, NFC-e ou NFS-e) é necessário um certificado digital válido. Nós orientamos qual modelo é o mais indicado para o seu tipo de operação.',
+        question: 'Quais documentos preciso enviar?',
+        answer: 'Depende do tipo de certificado (e-CPF ou e-CNPJ) e do seu perfil. Após entender o seu caso, enviamos a lista exata de documentos necessários pelo WhatsApp, sem você precisar adivinhar nada.',
     },
     {
-        question: 'O atendimento e a orientação têm custo?',
-        answer: 'A orientação para escolher o certificado ideal é gratuita e sem compromisso. Você só investe quando decide seguir com a emissão por meio de um dos nossos parceiros autorizados.',
+        question: 'Consigo fazer o processo online?',
+        answer: 'Em muitos casos sim, com validação por videoconferência, dependendo do tipo de certificado e do parceiro responsável pela emissão. Verificamos a melhor forma para o seu caso e te orientamos passo a passo.',
+    },
+    {
+        question: 'Vocês ajudam na instalação?',
+        answer: 'Sim. Depois da emissão, orientamos a instalação e o uso do certificado e seguimos à disposição para tirar dúvidas durante a vigência.',
+    },
+    {
+        question: 'Quanto tempo demora?',
+        answer: 'O prazo varia conforme o tipo de certificado, a disponibilidade dos seus documentos e o agendamento da validação. Assim que entendemos a sua urgência, passamos uma estimativa realista para o seu caso.',
+    },
+    {
+        question: 'O certificado tem validade jurídica?',
+        answer: 'Sim. Certificados digitais emitidos dentro do padrão ICP-Brasil têm validade jurídica e são aceitos por órgãos públicos, bancos e sistemas oficiais.',
+    },
+    {
+        question: 'Como funciona o pagamento?',
+        answer: 'Após entender a sua necessidade, enviamos os valores e as formas de pagamento disponíveis pelo WhatsApp. Tudo é informado de forma transparente antes de você decidir seguir.',
     },
 ];
 
@@ -40,7 +56,7 @@ const FAQ = () => {
                     <span className="text-sm font-bold uppercase tracking-wider text-brand-600">
                         Dúvidas frequentes
                     </span>
-                    <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+                    <h2 className="mt-3 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
                         Ainda com perguntas?
                     </h2>
                     <p className="mt-4 text-lg text-slate-600">

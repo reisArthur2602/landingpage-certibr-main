@@ -1,12 +1,16 @@
-import { WHATSAPP_URL } from './site-config';
+'use client';
+
+import { buildWhatsAppUrl, WHATSAPP_MESSAGES } from './site-config';
+import { trackEvent } from './analytics';
 
 const WhatsAppFloat = () => {
     return (
         <a
-            href={WHATSAPP_URL}
+            href={buildWhatsAppUrl(WHATSAPP_MESSAGES.default)}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Falar no WhatsApp"
+            onClick={() => trackEvent('click_whatsapp_floating')}
             className="group fixed bottom-5 right-5 z-50 flex items-center gap-3 rounded-full bg-[#25D366] py-3 pl-3 pr-3 text-white shadow-lg shadow-black/20 transition-all hover:pr-5 sm:bottom-7 sm:right-7"
         >
             <svg

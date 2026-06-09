@@ -1,11 +1,18 @@
 import type { Metadata } from 'next';
-import { Manrope } from 'next/font/google';
+import { Sora, Inter } from 'next/font/google';
 import './globals.css';
 
-const manrope = Manrope({
-    variable: '--font-manrope',
+// Sora (variável) para títulos — tom tech/SaaS. Usada com pesos 600/700.
+const sora = Sora({
+    variable: '--font-sora',
     subsets: ['latin'],
-    weight: ['400', '500', '600', '700', '800'],
+    display: 'swap',
+});
+
+// Inter (variável) para textos, botões, cards, formulários, FAQ e navegação.
+const inter = Inter({
+    variable: '--font-inter',
+    subsets: ['latin'],
     display: 'swap',
 });
 
@@ -15,12 +22,12 @@ export const metadata: Metadata = {
     metadataBase: new URL(baseUrl),
 
     title: {
-        default: 'certiBR — Certificado Digital sem complicação',
+        default: 'Certificado Digital A1 e A3 com Suporte | certiBR',
         template: '%s | certiBR',
     },
 
     description:
-        'A certiBR orienta você a escolher o certificado digital ideal (e-CNPJ, e-CPF, A1 ou A3) e faz a ponte com autoridades certificadoras autorizadas ICP-Brasil. Atendimento humano, processo ágil.',
+        'Compre certificado digital A1, A3, e-CNPJ ou e-CPF com orientação completa, atendimento pelo WhatsApp e suporte na instalação.',
 
     keywords: [
         'certificado digital',
@@ -48,9 +55,9 @@ export const metadata: Metadata = {
         type: 'website',
         url: '/',
         siteName: 'certiBR',
-        title: 'certiBR — Certificado Digital sem complicação',
+        title: 'Certificado Digital A1 e A3 com Suporte | certiBR',
         description:
-            'Orientação especializada e intermediação de certificados digitais com parceiros autorizados ICP-Brasil. Fale com um especialista.',
+            'Compre certificado digital A1, A3, e-CNPJ ou e-CPF com orientação completa, atendimento pelo WhatsApp e suporte na instalação.',
         locale: 'pt_BR',
         images: [
             {
@@ -64,9 +71,9 @@ export const metadata: Metadata = {
 
     twitter: {
         card: 'summary_large_image',
-        title: 'certiBR — Certificado Digital sem complicação',
+        title: 'Certificado Digital A1 e A3 com Suporte | certiBR',
         description:
-            'Orientação especializada e intermediação de certificados digitais com parceiros autorizados ICP-Brasil.',
+            'Compre certificado digital A1, A3, e-CNPJ ou e-CPF com orientação completa, atendimento pelo WhatsApp e suporte na instalação.',
         images: ['/og-image.png'],
     },
 
@@ -94,7 +101,10 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="pt-BR" className={`${manrope.variable} h-full antialiased`}>
+        <html
+            lang="pt-BR"
+            className={`${sora.variable} ${inter.variable} h-full antialiased`}
+        >
             <body>{children}</body>
         </html>
     );

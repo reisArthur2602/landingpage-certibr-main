@@ -1,13 +1,13 @@
+import Header from '@/components/landing/header';
+import Hero from '@/components/landing/hero';
+import CertificateQuiz from '@/components/landing/certificate-quiz';
+import PricingCards from '@/components/landing/pricing-cards';
+import HowItWorks from '@/components/landing/how-it-works';
 import Benefits from '@/components/landing/benefits';
-import Certificates from '@/components/landing/certificates';
+import Testimonials from '@/components/landing/testimonials';
 import FAQ from '@/components/landing/faq';
 import FinalCTA from '@/components/landing/final-cta';
 import Footer from '@/components/landing/footer';
-import Header from '@/components/landing/header';
-import Hero from '@/components/landing/hero';
-import HowItWorks from '@/components/landing/how-it-works';
-import Testimonials from '@/components/landing/testimonials';
-import TrustBar from '@/components/landing/trust-bar';
 import WhatsAppFloat from '@/components/landing/whatsapp-float';
 
 const LandingPage = () => {
@@ -16,8 +16,8 @@ const LandingPage = () => {
             <Header />
             <main>
                 <Hero />
-                <TrustBar />
-                <Certificates />
+                <CertificateQuiz />
+                <PricingCards />
                 <HowItWorks />
                 <Benefits />
                 <Testimonials />

@@ -1,30 +1,36 @@
-import { MessageSquare, Lightbulb, Handshake, CheckCircle2 } from 'lucide-react';
+import { MessageSquare, Search, FileText, Handshake, LifeBuoy, ShieldCheck } from 'lucide-react';
 import { WHATSAPP_URL } from './site-config';
 
 const steps = [
     {
         icon: MessageSquare,
-        title: 'Você entra em contato',
+        title: 'Você chama no WhatsApp',
         description:
-            'Fale com a gente pelo WhatsApp e conte sobre o seu negócio. Sem formulários longos e sem compromisso.',
+            'Fale com a gente e conte sobre o seu negócio ou profissão. Sem formulários longos e sem compromisso.',
     },
     {
-        icon: Lightbulb,
-        title: 'Recebe orientação especializada',
+        icon: Search,
+        title: 'Identificamos o certificado ideal',
         description:
-            'Indicamos o tipo de certificado ideal (e-CNPJ, e-CPF, A1 ou A3) de acordo com a sua necessidade real.',
+            'Analisamos a sua necessidade e indicamos o tipo certo: e-CNPJ, e-CPF, A1 ou A3.',
+    },
+    {
+        icon: FileText,
+        title: 'Enviamos valores e documentos necessários',
+        description:
+            'Você recebe o orçamento e a lista exata de documentos para dar andamento, sem surpresas.',
     },
     {
         icon: Handshake,
-        title: 'Intermediamos a emissão',
+        title: 'Fazemos a ponte com parceiro autorizado',
         description:
-            'Fazemos a ponte com uma autoridade certificadora autorizada e acompanhamos todo o processo até o fim.',
+            'Conectamos você a um parceiro autorizado da cadeia ICP-Brasil, responsável pela emissão.',
     },
     {
-        icon: CheckCircle2,
-        title: 'Certificado pronto para usar',
+        icon: LifeBuoy,
+        title: 'Você recebe suporte para instalar e usar',
         description:
-            'Você recebe orientação para instalar e usar, com nosso suporte disponível durante toda a vigência.',
+            'Acompanhamos a instalação e seguimos à disposição durante toda a vigência do certificado.',
     },
 ];
 
@@ -36,16 +42,16 @@ const HowItWorks = () => {
                     <span className="text-sm font-bold uppercase tracking-wider text-brand-600">
                         Como funciona
                     </span>
-                    <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
-                        Simples do começo ao fim
+                    <h2 className="mt-3 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+                        Do primeiro contato ao certificado pronto
                     </h2>
                     <p className="mt-4 text-lg text-slate-600">
-                        A certiBR cuida da parte burocrática. Você só precisa nos dizer o que
-                        precisa.
+                        Um processo simples e transparente, conduzido por gente que entende do
+                        assunto.
                     </p>
                 </div>
 
-                <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+                <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-5">
                     {steps.map((step, index) => (
                         <div key={step.title} className="relative">
                             <div className="flex flex-col items-start">
@@ -57,21 +63,30 @@ const HowItWorks = () => {
                                         {index + 1}
                                     </span>
                                 </div>
-                                <h3 className="mt-5 text-lg font-bold text-slate-900">
+                                <h3 className="mt-5 text-base font-bold text-slate-900">
                                     {step.title}
                                 </h3>
                                 <p className="mt-2 text-sm leading-relaxed text-slate-600">
                                     {step.description}
                                 </p>
                             </div>
-                            {index < steps.length - 1 && (
-                                <div className="absolute right-0 top-8 hidden h-px w-8 translate-x-full bg-brand-200 lg:block" />
-                            )}
                         </div>
                     ))}
                 </div>
 
-                <div className="mt-14 flex justify-center">
+                {/* Aviso de intermediação (tom positivo) */}
+                <div className="mt-12 flex items-start gap-4 rounded-2xl border border-brand-100 bg-brand-50/60 p-6">
+                    <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-brand-600 text-white">
+                        <ShieldCheck size={22} />
+                    </span>
+                    <p className="text-sm leading-relaxed text-slate-700">
+                        Atuamos como parceira/intermediadora comercial, conectando você a parceiros
+                        autorizados na cadeia ICP-Brasil e acompanhando todo o processo — da escolha
+                        à instalação.
+                    </p>
+                </div>
+
+                <div className="mt-12 flex justify-center">
                     <a
                         href={WHATSAPP_URL}
                         target="_blank"

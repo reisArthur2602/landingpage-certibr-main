@@ -13,7 +13,7 @@ const FinalCTA = () => {
                         <ShieldCheck size={15} />
                         Orientação gratuita e sem compromisso
                     </span>
-                    <h2 className="mx-auto mt-5 max-w-3xl text-3xl font-extrabold leading-tight tracking-tight text-white sm:text-4xl lg:text-5xl">
+                    <h2 className="mx-auto mt-5 max-w-3xl text-3xl font-bold leading-tight tracking-tight text-white sm:text-4xl lg:text-5xl">
                         Pronto para ter o certificado digital certo para o seu negócio?
                     </h2>
                     <p className="mx-auto mt-5 max-w-2xl text-lg text-brand-50/90">

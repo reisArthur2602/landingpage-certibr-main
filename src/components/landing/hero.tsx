@@ -1,8 +1,15 @@
-import Link from 'next/link';
-import { MessageCircle, ShieldCheck, Star, Clock, Lock } from 'lucide-react';
-import { WHATSAPP_URL } from './site-config';
+'use client';
+
+import { MessageCircle, ShieldCheck, Star, Clock, Lock, HelpCircle } from 'lucide-react';
+import { buildWhatsAppUrl, WHATSAPP_MESSAGES } from './site-config';
+import { trackEvent } from './analytics';
 
 const Hero = () => {
+    const goToQuiz = () => {
+        trackEvent('click_quiz_start', { source: 'hero' });
+        document.getElementById('quiz')?.scrollIntoView({ behavior: 'smooth' });
+    };
+
     return (
         <section
             id="inicio"
@@ -15,43 +22,45 @@ const Hero = () => {
                 <div className="animate-fade-up">
                     <span className="inline-flex items-center gap-2 rounded-full border border-brand-200 bg-white px-4 py-1.5 text-xs font-semibold text-brand-700 shadow-sm">
                         <ShieldCheck size={15} />
-                        Parceira oficial de autoridades certificadoras
+                        Parceira comercial · cadeia ICP-Brasil
                     </span>
 
-                    <h1 className="mt-6 text-4xl font-extrabold leading-[1.1] tracking-tight text-slate-900 sm:text-5xl lg:text-[3.4rem]">
-                        O certificado digital{' '}
-                        <span className="text-brand-600">ideal para sua empresa</span>, sem
-                        complicação
+                    <h1 className="mt-6 text-4xl font-bold leading-[1.1] tracking-tight text-slate-900 sm:text-5xl lg:text-[3.3rem]">
+                        Certificado Digital{' '}
+                        <span className="text-brand-600">A1 e A3</span> com orientação completa
+                        até a emissão
                     </h1>
 
                     <p className="mt-5 max-w-xl text-lg leading-relaxed text-slate-600">
-                        A certiBR orienta você a escolher o certificado certo e faz a ponte com
-                        autoridades certificadoras autorizadas. Atendimento humano, do primeiro
-                        contato até a emissão.
+                        Ajudamos você a escolher, comprar e instalar o certificado ideal para sua
+                        empresa ou profissão, sem complicação.
                     </p>
 
                     <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                         <a
-                            href={WHATSAPP_URL}
+                            href={buildWhatsAppUrl(WHATSAPP_MESSAGES.heroBuy)}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center justify-center gap-2 rounded-full bg-brand-600 px-7 py-3.5 text-base font-semibold text-white shadow-lg shadow-brand-600/25 transition-all hover:bg-brand-700 hover:shadow-xl hover:shadow-brand-600/30"
+                            onClick={() => trackEvent('click_whatsapp_hero')}
+                            className="inline-flex items-center justify-center gap-2 rounded-full bg-brand-600 px-7 py-4 text-base font-semibold text-white shadow-lg shadow-brand-600/25 transition-all hover:bg-brand-700 hover:shadow-xl hover:shadow-brand-600/30"
                         >
                             <MessageCircle size={19} />
-                            Falar com um especialista
+                            Quero comprar pelo WhatsApp
                         </a>
-                        <Link
-                            href="#certificados"
-                            className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-200 bg-white px-7 py-3.5 text-base font-semibold text-slate-700 transition-colors hover:border-brand-300 hover:text-brand-700"
+                        <button
+                            type="button"
+                            onClick={goToQuiz}
+                            className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-200 bg-white px-7 py-4 text-base font-semibold text-slate-700 transition-colors hover:border-brand-300 hover:text-brand-700"
                         >
-                            Ver certificados
-                        </Link>
+                            <HelpCircle size={19} />
+                            Não sei qual certificado preciso
+                        </button>
                     </div>
 
                     <div className="mt-9 flex flex-wrap items-center gap-x-7 gap-y-3 text-sm text-slate-500">
                         <span className="inline-flex items-center gap-2">
                             <Clock size={16} className="text-brand-600" />
-                            Emissão ágil
+                            Atendimento ágil pelo WhatsApp
                         </span>
                         <span className="inline-flex items-center gap-2">
                             <Lock size={16} className="text-brand-600" />
@@ -59,7 +68,7 @@ const Hero = () => {
                         </span>
                         <span className="inline-flex items-center gap-2">
                             <Star size={16} className="text-brand-600 fill-brand-600" />
-                            Atendimento nota 10
+                            Suporte na instalação
                         </span>
                     </div>
                 </div>
@@ -85,9 +94,9 @@ const Hero = () => {
 
                         <div className="mt-6 space-y-3">
                             {[
-                                'Validação simplificada',
+                                'Ajuda para escolher o certificado certo',
                                 'Emissão com parceiro autorizado',
-                                'Suporte durante toda a vigência',
+                                'Suporte na instalação e no uso',
                             ].map((item) => (
                                 <div
                                     key={item}
@@ -111,10 +120,16 @@ const Hero = () => {
                         </div>
                     </div>
 
-                    <div className="absolute -left-4 bottom-6 hidden animate-float rounded-2xl border border-brand-100 bg-white px-4 py-3 shadow-xl sm:block">
-                        <p className="text-2xl font-extrabold text-brand-600">+5 mil</p>
-                        <p className="text-xs text-slate-500">empresas orientadas</p>
-                    </div>
+                    <button
+                        type="button"
+                        onClick={goToQuiz}
+                        className="absolute -left-4 bottom-6 hidden animate-float items-center gap-2 rounded-2xl border border-brand-100 bg-white px-4 py-3 text-left shadow-xl sm:flex"
+                    >
+                        <HelpCircle size={20} className="text-brand-600" />
+                        <span className="text-xs font-semibold text-slate-700">
+                            Fazer o teste rápido
+                        </span>
+                    </button>
                 </div>
             </div>
         </section>

@@ -1,11 +1,4 @@
-import {
-    Headset,
-    Wallet,
-    ShieldCheck,
-    Zap,
-    UserCheck,
-    ThumbsUp,
-} from 'lucide-react';
+import { Headset, Compass, Download, MessageCircle, Users, ShieldAlert } from 'lucide-react';
 
 const benefits = [
     {
@@ -15,34 +8,34 @@ const benefits = [
             'Você fala com gente de verdade, que entende do assunto e responde rápido — sem menus e sem robôs.',
     },
     {
-        icon: Wallet,
-        title: 'Os melhores preços',
+        icon: Compass,
+        title: 'Ajuda para escolher o certificado certo',
         description:
-            'Como intermediadora, negociamos com diversos parceiros e indicamos a opção com o melhor custo-benefício.',
+            'Analisamos o seu caso e indicamos exatamente o tipo de certificado que você precisa.',
     },
     {
-        icon: ShieldCheck,
-        title: 'Parceiros autorizados',
+        icon: Download,
+        title: 'Suporte na instalação',
         description:
-            'A emissão é feita por autoridades certificadoras credenciadas no padrão ICP-Brasil. Total segurança.',
+            'Não te deixamos na mão depois da compra: orientamos a instalação e o uso passo a passo.',
     },
     {
-        icon: Zap,
-        title: 'Processo ágil',
+        icon: MessageCircle,
+        title: 'Processo simples pelo WhatsApp',
         description:
-            'Reduzimos a burocracia e organizamos cada etapa para que seu certificado saia o quanto antes.',
+            'Tudo resolvido pelo WhatsApp, sem deslocamento e sem burocracia desnecessária.',
     },
     {
-        icon: UserCheck,
-        title: 'Orientação sob medida',
+        icon: Users,
+        title: 'Ideal para empresas, MEIs e profissionais',
         description:
-            'Analisamos o seu caso e indicamos o certificado certo. Nada de pagar por algo que você não precisa.',
+            'Atendemos desde MEIs e autônomos até empresas e profissionais liberais como advogados e médicos.',
     },
     {
-        icon: ThumbsUp,
-        title: 'Suporte de ponta a ponta',
+        icon: ShieldAlert,
+        title: 'Evite comprar o certificado errado',
         description:
-            'Acompanhamos da escolha à instalação e seguimos à disposição durante toda a vigência do certificado.',
+            'Orientação antes da compra para você não gastar com um certificado que não atende ao seu objetivo.',
     },
 ];
 
@@ -58,14 +51,14 @@ const Benefits = () => {
             <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
                 <div className="mx-auto max-w-2xl text-center">
                     <span className="text-sm font-bold uppercase tracking-wider text-brand-300">
-                        Por que a certiBR
+                        Por que comprar com a gente
                     </span>
-                    <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
-                        Vantagens de contratar com quem entende
+                    <h2 className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+                        Mais do que vender: a gente te orienta
                     </h2>
                     <p className="mt-4 text-lg text-brand-100/80">
-                        Somos a ponte entre você e o certificado digital — com orientação honesta e
-                        acompanhamento de verdade.
+                        Cuidamos da escolha, da compra e da instalação para você não ter dor de
+                        cabeça.
                     </p>
                 </div>
 

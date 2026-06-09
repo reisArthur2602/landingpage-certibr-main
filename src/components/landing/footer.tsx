@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import { ShieldCheck, Mail, Phone, MapPin } from 'lucide-react';
-import { NAV_LINKS, WHATSAPP_URL } from './site-config';
+import { ShieldCheck, Mail, MessageCircle, MapPin } from 'lucide-react';
+import { NAV_LINKS, WHATSAPP_URL, CONTACT_EMAIL } from './site-config';
 
 const socials = [
     {
@@ -17,13 +17,7 @@ const socials = [
     },
 ];
 
-const certLinks = [
-    'Certificado e-CNPJ',
-    'Certificado e-CPF',
-    'Certificado NF-e',
-    'Modelo A1',
-    'Modelo A3',
-];
+const certLinks = ['e-CNPJ A1', 'e-CPF A1', 'e-CNPJ A3', 'e-CPF A3'];
 
 const Footer = () => {
     return (
@@ -111,13 +105,25 @@ const Footer = () => {
                             Contato
                         </h3>
                         <ul className="mt-4 space-y-3 text-sm">
-                            <li className="flex items-center gap-3">
-                                <Phone size={16} className="text-brand-400" />
-                                (00) 00000-0000
+                            <li>
+                                <a
+                                    href={WHATSAPP_URL}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center gap-3 transition-colors hover:text-white"
+                                >
+                                    <MessageCircle size={16} className="text-brand-400" />
+                                    Falar no WhatsApp
+                                </a>
                             </li>
-                            <li className="flex items-center gap-3">
-                                <Mail size={16} className="text-brand-400" />
-                                contato@certibr.com.br
+                            <li>
+                                <a
+                                    href={`mailto:${CONTACT_EMAIL}`}
+                                    className="flex items-center gap-3 transition-colors hover:text-white"
+                                >
+                                    <Mail size={16} className="text-brand-400" />
+                                    {CONTACT_EMAIL}
+                                </a>
                             </li>
                             <li className="flex items-start gap-3">
                                 <MapPin size={16} className="mt-0.5 text-brand-400" />

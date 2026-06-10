@@ -18,13 +18,11 @@ import StatusBadge from '@/components/painel/status-badge';
 import {
     STATUS_LABELS,
     CERT_LABELS,
-    URGENCY_LABELS,
-    URGENCY_COLORS,
     formatDate,
     buildWhatsAppUrl,
 } from '@/lib/painel/utils';
 import { LEAD_STATUSES } from '@/lib/painel/types';
-import type { LeadStatus, CertificateType, Urgency } from '@/lib/painel/types';
+import type { LeadStatus, CertificateType } from '@/lib/painel/types';
 import { MESSAGE_TEMPLATES } from '@/lib/painel/messages';
 
 const PAGE_SIZE = 15;
@@ -38,7 +36,6 @@ export default function LeadsTable() {
     const [filterStatus, setFilterStatus] = useState<LeadStatus | ''>('');
     const [filterCert, setFilterCert] = useState<CertificateType | ''>('');
     const [filterConsultor, setFilterConsultor] = useState('');
-    const [filterUrgency, setFilterUrgency] = useState<Urgency | ''>('');
     const [showFilters, setShowFilters] = useState(false);
     const [page, setPage] = useState(1);
 
@@ -49,10 +46,9 @@ export default function LeadsTable() {
             if (filterStatus && l.status !== filterStatus) return false;
             if (filterCert && l.certificateType !== filterCert) return false;
             if (filterConsultor && l.assignedToId !== filterConsultor) return false;
-            if (filterUrgency && l.urgency !== filterUrgency) return false;
             return true;
         });
-    }, [allLeads, search, filterStatus, filterCert, filterConsultor, filterUrgency]);
+    }, [allLeads, search, filterStatus, filterCert, filterConsultor]);
 
     const paginated = useMemo(
         () => filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE),
@@ -67,11 +63,10 @@ export default function LeadsTable() {
         setFilterStatus('');
         setFilterCert('');
         setFilterConsultor('');
-        setFilterUrgency('');
         setPage(1);
     };
 
-    const hasFilters = search || filterStatus || filterCert || filterConsultor || filterUrgency;
+    const hasFilters = search || filterStatus || filterCert || filterConsultor;
 
     return (
         <div className="flex flex-col">
@@ -117,7 +112,7 @@ export default function LeadsTable() {
                 </div>
 
                 {showFilters && (
-                    <div className="grid grid-cols-2 gap-3 rounded-2xl border border-slate-200 bg-slate-50 p-4 sm:grid-cols-4">
+                    <div className="grid grid-cols-2 gap-3 rounded-2xl border border-slate-200 bg-slate-50 p-4 sm:grid-cols-3">
                         <select
                             value={filterStatus}
                             onChange={(e) => { setFilterStatus(e.target.value as LeadStatus | ''); setPage(1); }}
@@ -148,16 +143,6 @@ export default function LeadsTable() {
                                 <option key={u.id} value={u.id}>{u.name}</option>
                             ))}
                         </select>
-                        <select
-                            value={filterUrgency}
-                            onChange={(e) => { setFilterUrgency(e.target.value as Urgency | ''); setPage(1); }}
-                            className="rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-700 outline-none focus:border-brand-400"
-                        >
-                            <option value="">Urgência: Todas</option>
-                            {(Object.entries(URGENCY_LABELS) as [Urgency, string][]).map(([k, v]) => (
-                                <option key={k} value={k}>{v}</option>
-                            ))}
-                        </select>
                     </div>
                 )}
 
@@ -172,7 +157,6 @@ export default function LeadsTable() {
                                 <tr className="border-b border-slate-100 bg-slate-50">
                                     <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">Cliente</th>
                                     <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">Certificado</th>
-                                    <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">Urgência</th>
                                     <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">Status</th>
                                     <th className="hidden px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-slate-500 md:table-cell">Consultor</th>
                                     <th className="hidden px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-slate-500 lg:table-cell">Criado</th>
@@ -182,13 +166,12 @@ export default function LeadsTable() {
                             <tbody className="divide-y divide-slate-100">
                                 {paginated.length === 0 && (
                                     <tr>
-                                        <td colSpan={7} className="py-12 text-center text-sm text-slate-400">
+                                        <td colSpan={6} className="py-12 text-center text-sm text-slate-400">
                                             Nenhum lead encontrado para os filtros selecionados.
                                         </td>
                                     </tr>
                                 )}
                                 {paginated.map((lead) => {
-                                    const urg = URGENCY_COLORS[lead.urgency];
                                     return (
                                         <tr key={lead.id} className="hover:bg-slate-50 transition">
                                             <td className="px-4 py-3">
@@ -202,11 +185,6 @@ export default function LeadsTable() {
                                                 {lead.mainUse && (
                                                     <p className="text-xs text-slate-400 mt-0.5 truncate max-w-[140px]">{lead.mainUse}</p>
                                                 )}
-                                            </td>
-                                            <td className="px-4 py-3">
-                                                <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${urg.bg} ${urg.text}`}>
-                                                    {URGENCY_LABELS[lead.urgency]}
-                                                </span>
                                             </td>
                                             <td className="px-4 py-3">
                                                 <StatusBadge status={lead.status} size="sm" />

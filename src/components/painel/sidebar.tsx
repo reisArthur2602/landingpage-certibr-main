@@ -5,7 +5,6 @@ import { usePathname } from 'next/navigation';
 import {
     Users,
     Kanban,
-    Settings,
     ShieldCheck,
     UserCog,
     X,
@@ -20,7 +19,6 @@ const navItems = [
 
 const adminItems = [
     { href: '/usuarios', label: 'Consultores', icon: UserCog },
-    { href: '/configuracoes', label: 'Configurações', icon: Settings },
 ];
 
 interface Props {

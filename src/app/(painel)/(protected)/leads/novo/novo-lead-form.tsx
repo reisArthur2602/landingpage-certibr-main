@@ -5,11 +5,10 @@ import { useRouter } from 'next/navigation';
 import { usePainel } from '@/lib/painel/store';
 import { useMenuToggle } from '@/components/painel/menu-context';
 import Topbar from '@/components/painel/topbar';
-import { CERT_LABELS, URGENCY_LABELS, ORIGIN_LABELS, PERSON_TYPE_LABELS } from '@/lib/painel/utils';
-import type { CertificateType, PersonType, Urgency, LeadOrigin } from '@/lib/painel/types';
+import { CERT_LABELS, ORIGIN_LABELS, PERSON_TYPE_LABELS } from '@/lib/painel/utils';
+import type { CertificateType, PersonType, LeadOrigin } from '@/lib/painel/types';
 
 const CERTS = Object.entries(CERT_LABELS) as [CertificateType, string][];
-const URGENCIES = Object.entries(URGENCY_LABELS) as [Urgency, string][];
 const ORIGINS = Object.entries(ORIGIN_LABELS) as [LeadOrigin, string][];
 const PERSON_TYPES = Object.entries(PERSON_TYPE_LABELS) as [PersonType, string][];
 
@@ -46,7 +45,6 @@ export default function NovoLeadForm() {
     const [personType, setPersonType] = useState<PersonType>('nao_sei');
     const [certificateType, setCertificateType] = useState<CertificateType>('nao_sei');
     const [mainUse, setMainUse] = useState('');
-    const [urgency, setUrgency] = useState<Urgency>('semana');
     const [origin, setOrigin] = useState<LeadOrigin>('whatsapp');
     const [assignedToId, setAssignedToId] = useState('');
     const [notes, setNotes] = useState('');
@@ -72,7 +70,7 @@ export default function NovoLeadForm() {
             personType,
             certificateType,
             mainUse: mainUse.trim() || undefined,
-            urgency,
+            urgency: 'semana',
             origin,
             assignedToId: assignedToId || undefined,
             notes: notes.trim() || undefined,
@@ -116,18 +114,11 @@ export default function NovoLeadForm() {
                     </Section>
 
                     <Section title="Certificado">
-                        <div className="grid gap-4 sm:grid-cols-2">
-                            <Field label="Tipo de certificado">
-                                <select value={certificateType} onChange={(e) => setCertificateType(e.target.value as CertificateType)} className={inputCls}>
-                                    {CERTS.map(([k, v]) => <option key={k} value={k}>{v}</option>)}
-                                </select>
-                            </Field>
-                            <Field label="Urgência">
-                                <select value={urgency} onChange={(e) => setUrgency(e.target.value as Urgency)} className={inputCls}>
-                                    {URGENCIES.map(([k, v]) => <option key={k} value={k}>{v}</option>)}
-                                </select>
-                            </Field>
-                        </div>
+                        <Field label="Tipo de certificado">
+                            <select value={certificateType} onChange={(e) => setCertificateType(e.target.value as CertificateType)} className={inputCls}>
+                                {CERTS.map(([k, v]) => <option key={k} value={k}>{v}</option>)}
+                            </select>
+                        </Field>
                         <Field label="Uso principal (opcional)">
                             <input value={mainUse} onChange={(e) => setMainUse(e.target.value)} placeholder="Ex: Emitir NF-e, acessar e-CAC…" className={inputCls} />
                         </Field>

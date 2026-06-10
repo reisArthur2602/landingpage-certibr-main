@@ -10,10 +10,6 @@ import {
     LOST_REASON_LABELS,
     PERSON_TYPE_LABELS,
     STATUS_LABELS,
-    URGENCY_COLORS,
-    URGENCY_LABELS,
-    daysUntil,
-    formatDate,
     formatDateTime,
 } from '@/lib/painel/utils';
 import {
@@ -22,7 +18,6 @@ import {
     CheckCircle2,
     ChevronDown,
     Circle,
-    FileText,
     MessageCircle,
     RotateCcw,
     Send,
@@ -69,10 +64,7 @@ function Modal({
             <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl">
                 <div className="mb-4 flex items-center justify-between">
                     <h3 className="text-base font-bold text-slate-900">{title}</h3>
-                    <button
-                        onClick={onClose}
-                        className="rounded-lg p-1 text-slate-400 hover:bg-slate-100"
-                    >
+                    <button onClick={onClose} className="rounded-lg p-1 text-slate-400 hover:bg-slate-100">
                         <X size={18} />
                     </button>
                 </div>
@@ -91,8 +83,6 @@ export default function LeadDetail({ id }: { id: string }) {
         addNote,
         toggleChecklistItem,
         setFollowUp,
-        registerExpiry,
-        updateLead,
         users,
     } = usePainel();
 
@@ -108,10 +98,6 @@ export default function LeadDetail({ id }: { id: string }) {
     const [showLostModal, setShowLostModal] = useState(false);
     const [lostReason, setLostReason] = useState<LostReason>('nao_respondeu');
     const [lostNote, setLostNote] = useState('');
-    const [showExpiryModal, setShowExpiryModal] = useState(false);
-    const [expiryIssuedAt, setExpiryIssuedAt] = useState('');
-    const [expiryExpiresAt, setExpiryExpiresAt] = useState('');
-    const [assignedToId, setAssignedToId] = useState(lead?.assignedToId ?? '');
 
     if (!lead) {
         return (
@@ -152,19 +138,6 @@ export default function LeadDetail({ id }: { id: string }) {
         setLostNote('');
     };
 
-    const handleRegisterExpiry = () => {
-        if (!expiryIssuedAt || !expiryExpiresAt) return;
-        registerExpiry(lead.id, new Date(expiryIssuedAt), new Date(expiryExpiresAt));
-        setShowExpiryModal(false);
-    };
-
-    const handleAssignChange = (newId: string) => {
-        setAssignedToId(newId);
-        updateLead(lead.id, { assignedToId: newId || undefined });
-    };
-
-    const daysToExpiry = lead.expiresAt ? daysUntil(lead.expiresAt) : null;
-    const urgColor = URGENCY_COLORS[lead.urgency];
     const isLost = lead.status === 'perdido';
     const isDone = lead.status === 'instalado';
 
@@ -181,9 +154,7 @@ export default function LeadDetail({ id }: { id: string }) {
                             <ArrowLeft size={20} />
                         </Link>
                         <div className="min-w-0">
-                            <h1 className="truncate text-lg font-bold text-slate-900">
-                                {lead.name}
-                            </h1>
+                            <h1 className="truncate text-lg font-bold text-slate-900">{lead.name}</h1>
                             <p className="text-xs text-slate-500">{lead.whatsapp}</p>
                         </div>
                     </div>
@@ -237,7 +208,6 @@ export default function LeadDetail({ id }: { id: string }) {
                 <div className="grid gap-6 lg:grid-cols-3">
                     {/* Left column */}
                     <div className="space-y-5 lg:col-span-2">
-                        {/* WhatsApp quick actions */}
                         <Card title="Ações rápidas — WhatsApp">
                             <div className="flex flex-wrap gap-2">
                                 {MSG_KEYS.map((key) => (
@@ -255,7 +225,6 @@ export default function LeadDetail({ id }: { id: string }) {
                             </div>
                         </Card>
 
-                        {/* Notes */}
                         <Card title="Anotações">
                             <form onSubmit={handleAddNote} className="space-y-3">
                                 <textarea
@@ -279,10 +248,7 @@ export default function LeadDetail({ id }: { id: string }) {
                             {lead.notes.length > 0 && (
                                 <div className="mt-4 space-y-3">
                                     {lead.notes.map((n) => (
-                                        <div
-                                            key={n.id}
-                                            className="rounded-xl border border-slate-100 bg-slate-50 px-4 py-3"
-                                        >
+                                        <div key={n.id} className="rounded-xl border border-slate-100 bg-slate-50 px-4 py-3">
                                             <div className="flex items-center justify-between gap-2 mb-1">
                                                 <span className="text-xs font-semibold text-slate-600">
                                                     {getUserName(n.userId)}
@@ -291,19 +257,14 @@ export default function LeadDetail({ id }: { id: string }) {
                                                     {formatDateTime(n.createdAt)}
                                                 </span>
                                             </div>
-                                            <p className="text-sm text-slate-800 whitespace-pre-wrap">
-                                                {n.content}
-                                            </p>
+                                            <p className="text-sm text-slate-800 whitespace-pre-wrap">{n.content}</p>
                                         </div>
                                     ))}
                                 </div>
                             )}
                         </Card>
 
-                        {/* Checklist */}
-                        <Card
-                            title={`Checklist (${lead.checklist.filter((i) => i.checked).length}/${lead.checklist.length})`}
-                        >
+                        <Card title={`Checklist (${lead.checklist.filter((i) => i.checked).length}/${lead.checklist.length})`}>
                             <div className="space-y-2">
                                 {lead.checklist.map((item) => (
                                     <button
@@ -316,16 +277,11 @@ export default function LeadDetail({ id }: { id: string }) {
                                         }`}
                                     >
                                         {item.checked ? (
-                                            <CheckCircle2
-                                                size={18}
-                                                className="shrink-0 text-green-600"
-                                            />
+                                            <CheckCircle2 size={18} className="shrink-0 text-green-600" />
                                         ) : (
                                             <Circle size={18} className="shrink-0 text-slate-300" />
                                         )}
-                                        <span
-                                            className={`text-sm ${item.checked ? 'line-through text-slate-400' : 'text-slate-700'}`}
-                                        >
+                                        <span className={`text-sm ${item.checked ? 'line-through text-slate-400' : 'text-slate-700'}`}>
                                             {item.label}
                                         </span>
                                     </button>
@@ -333,19 +289,15 @@ export default function LeadDetail({ id }: { id: string }) {
                             </div>
                         </Card>
 
-                        {/* Activity history */}
                         <Card title="Histórico">
                             <div className="space-y-1">
                                 {[...lead.activities].reverse().map((act) => (
                                     <div key={act.id} className="flex gap-3 py-2">
                                         <div className="mt-1 h-2 w-2 shrink-0 rounded-full bg-brand-400" />
                                         <div className="min-w-0">
-                                            <p className="text-sm text-slate-700">
-                                                {act.description}
-                                            </p>
+                                            <p className="text-sm text-slate-700">{act.description}</p>
                                             <p className="mt-0.5 text-xs text-slate-400">
-                                                {getUserName(act.userId)} ·{' '}
-                                                {formatDateTime(act.createdAt)}
+                                                {getUserName(act.userId)} · {formatDateTime(act.createdAt)}
                                             </p>
                                         </div>
                                     </div>
@@ -358,59 +310,22 @@ export default function LeadDetail({ id }: { id: string }) {
                     <div className="space-y-5">
                         <Card title="Informações">
                             <dl className="space-y-3 text-sm">
-                                <Row
-                                    label="Certificado"
-                                    value={CERT_LABELS[lead.certificateType]}
-                                />
-                                <Row
-                                    label="Tipo de pessoa"
-                                    value={PERSON_TYPE_LABELS[lead.personType]}
-                                />
+                                <Row label="Certificado" value={CERT_LABELS[lead.certificateType]} />
+                                <Row label="Tipo de pessoa" value={PERSON_TYPE_LABELS[lead.personType]} />
                                 {lead.cpfCnpj && <Row label="CPF/CNPJ" value={lead.cpfCnpj} />}
                                 {lead.email && <Row label="E-mail" value={lead.email} />}
                                 {lead.mainUse && <Row label="Uso principal" value={lead.mainUse} />}
-                                <Row
-                                    label="Urgência"
-                                    value={
-                                        <span
-                                            className={`rounded-full px-2 py-0.5 text-xs font-medium ${urgColor.bg} ${urgColor.text}`}
-                                        >
-                                            {URGENCY_LABELS[lead.urgency]}
-                                        </span>
-                                    }
-                                />
                                 <Row label="Criado em" value={formatDateTime(lead.createdAt)} />
                             </dl>
                             {isLost && lead.lostReason && (
                                 <div className="mt-4 rounded-xl bg-red-50 border border-red-200 p-3">
-                                    <p className="text-xs font-semibold text-red-700 mb-0.5">
-                                        Motivo da perda
-                                    </p>
-                                    <p className="text-sm text-red-600">
-                                        {LOST_REASON_LABELS[lead.lostReason]}
-                                    </p>
+                                    <p className="text-xs font-semibold text-red-700 mb-0.5">Motivo da perda</p>
+                                    <p className="text-sm text-red-600">{LOST_REASON_LABELS[lead.lostReason]}</p>
                                     {lead.lostNote && (
                                         <p className="mt-1 text-xs text-red-500">{lead.lostNote}</p>
                                     )}
                                 </div>
                             )}
-                        </Card>
-
-                        <Card title="Consultor responsável">
-                            <select
-                                value={assignedToId}
-                                onChange={(e) => handleAssignChange(e.target.value)}
-                                className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-700 outline-none focus:border-brand-400 transition"
-                            >
-                                <option value="">— Sem consultor —</option>
-                                {users
-                                    .filter((u) => u.active)
-                                    .map((u) => (
-                                        <option key={u.id} value={u.id}>
-                                            {u.name} ({u.role})
-                                        </option>
-                                    ))}
-                            </select>
                         </Card>
 
                         <Card title="Próximo retorno">
@@ -436,9 +351,7 @@ export default function LeadDetail({ id }: { id: string }) {
                                     </div>
                                 </div>
                             ) : (
-                                <p className="mb-3 text-sm text-slate-400">
-                                    Nenhum retorno agendado.
-                                </p>
+                                <p className="mb-3 text-sm text-slate-400">Nenhum retorno agendado.</p>
                             )}
                             {!showFollowUpForm ? (
                                 <button
@@ -452,9 +365,7 @@ export default function LeadDetail({ id }: { id: string }) {
                                 <div className="space-y-3">
                                     <div className="grid grid-cols-2 gap-2">
                                         <div>
-                                            <label className="mb-1 block text-xs text-slate-500">
-                                                Data
-                                            </label>
+                                            <label className="mb-1 block text-xs text-slate-500">Data</label>
                                             <input
                                                 type="date"
                                                 value={followUpDate}
@@ -463,9 +374,7 @@ export default function LeadDetail({ id }: { id: string }) {
                                             />
                                         </div>
                                         <div>
-                                            <label className="mb-1 block text-xs text-slate-500">
-                                                Hora
-                                            </label>
+                                            <label className="mb-1 block text-xs text-slate-500">Hora</label>
                                             <input
                                                 type="time"
                                                 value={followUpTime}
@@ -499,50 +408,6 @@ export default function LeadDetail({ id }: { id: string }) {
                             )}
                         </Card>
 
-                        <Card title="Vencimento do certificado">
-                            {lead.expiresAt ? (
-                                <div>
-                                    <dl className="space-y-2 text-sm mb-3">
-                                        <Row label="Emitido em" value={formatDate(lead.issuedAt)} />
-                                        <Row
-                                            label="Vencimento"
-                                            value={formatDate(lead.expiresAt)}
-                                        />
-                                        {daysToExpiry !== null && (
-                                            <Row
-                                                label="Situação"
-                                                value={
-                                                    <span
-                                                        className={`text-xs font-semibold ${daysToExpiry <= 30 ? 'text-amber-600' : 'text-green-600'}`}
-                                                    >
-                                                        {daysToExpiry < 0
-                                                            ? `Vencido há ${Math.abs(daysToExpiry)} dias`
-                                                            : daysToExpiry === 0
-                                                              ? 'Vence hoje!'
-                                                              : `${daysToExpiry} dias restantes`}
-                                                    </span>
-                                                }
-                                            />
-                                        )}
-                                    </dl>
-                                    <button
-                                        onClick={() => setShowExpiryModal(true)}
-                                        className="w-full rounded-xl border border-slate-200 py-2 text-xs text-slate-500 hover:bg-slate-50 transition"
-                                    >
-                                        Atualizar datas
-                                    </button>
-                                </div>
-                            ) : (
-                                <button
-                                    onClick={() => setShowExpiryModal(true)}
-                                    className="w-full rounded-xl border border-dashed border-slate-300 py-2.5 text-sm text-slate-500 hover:border-brand-400 hover:text-brand-600 transition"
-                                >
-                                    <FileText size={14} className="inline mr-1.5" />
-                                    Registrar vencimento
-                                </button>
-                            )}
-                        </Card>
-
                         {!isLost && !isDone && (
                             <Card title="Ações">
                                 <button
@@ -561,18 +426,14 @@ export default function LeadDetail({ id }: { id: string }) {
                 <Modal title="Marcar como perdido" onClose={() => setShowLostModal(false)}>
                     <div className="space-y-4">
                         <div>
-                            <label className="mb-1.5 block text-sm font-medium text-slate-600">
-                                Motivo
-                            </label>
+                            <label className="mb-1.5 block text-sm font-medium text-slate-600">Motivo</label>
                             <select
                                 value={lostReason}
                                 onChange={(e) => setLostReason(e.target.value as LostReason)}
                                 className="w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm outline-none focus:border-brand-400"
                             >
                                 {LOST_REASONS.map(([k, v]) => (
-                                    <option key={k} value={k}>
-                                        {v}
-                                    </option>
+                                    <option key={k} value={k}>{v}</option>
                                 ))}
                             </select>
                         </div>
@@ -600,50 +461,6 @@ export default function LeadDetail({ id }: { id: string }) {
                                 className="flex-1 rounded-xl bg-red-600 py-2.5 text-sm font-semibold text-white hover:bg-red-700 transition"
                             >
                                 Confirmar perda
-                            </button>
-                        </div>
-                    </div>
-                </Modal>
-            )}
-
-            {showExpiryModal && (
-                <Modal title="Registrar vencimento" onClose={() => setShowExpiryModal(false)}>
-                    <div className="space-y-4">
-                        <div>
-                            <label className="mb-1.5 block text-sm font-medium text-slate-600">
-                                Data de emissão
-                            </label>
-                            <input
-                                type="date"
-                                value={expiryIssuedAt}
-                                onChange={(e) => setExpiryIssuedAt(e.target.value)}
-                                className="w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm outline-none focus:border-brand-400"
-                            />
-                        </div>
-                        <div>
-                            <label className="mb-1.5 block text-sm font-medium text-slate-600">
-                                Data de vencimento
-                            </label>
-                            <input
-                                type="date"
-                                value={expiryExpiresAt}
-                                onChange={(e) => setExpiryExpiresAt(e.target.value)}
-                                className="w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm outline-none focus:border-brand-400"
-                            />
-                        </div>
-                        <div className="flex gap-3 pt-1">
-                            <button
-                                onClick={() => setShowExpiryModal(false)}
-                                className="flex-1 rounded-xl border border-slate-200 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 transition"
-                            >
-                                Cancelar
-                            </button>
-                            <button
-                                onClick={handleRegisterExpiry}
-                                disabled={!expiryIssuedAt || !expiryExpiresAt}
-                                className="flex-1 rounded-xl bg-brand-600 py-2.5 text-sm font-semibold text-white hover:bg-brand-700 disabled:opacity-50 transition"
-                            >
-                                Salvar
                             </button>
                         </div>
                     </div>

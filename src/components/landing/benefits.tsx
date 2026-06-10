@@ -1,4 +1,4 @@
-import { Headset, Compass, Download, MessageCircle, Users, ShieldAlert } from 'lucide-react';
+import { Headset, Compass, Download, MessageCircle, Users, ShieldAlert, Laptop, FileText, Clock } from 'lucide-react';
 
 const benefits = [
     {
@@ -11,7 +11,7 @@ const benefits = [
         icon: Compass,
         title: 'Ajuda para escolher o certificado certo',
         description:
-            'Analisamos o seu caso e indicamos exatamente o tipo de certificado que você precisa.',
+            'Analisamos o seu caso e indicamos exatamente o tipo de Certificado A1 que você precisa.',
     },
     {
         icon: Download,
@@ -26,8 +26,20 @@ const benefits = [
             'Tudo resolvido pelo WhatsApp, sem deslocamento e sem burocracia desnecessária.',
     },
     {
+        icon: Laptop,
+        title: 'Sem token físico',
+        description:
+            'O Certificado Digital A1 é um arquivo digital instalado no computador — sem comprar token ou cartão.',
+    },
+    {
+        icon: FileText,
+        title: 'Ideal para emissão de nota fiscal',
+        description:
+            'Garanta a emissão de notas fiscais eletrônicas com o certificado correto para a sua operação.',
+    },
+    {
         icon: Users,
-        title: 'Ideal para empresas, MEIs e profissionais',
+        title: 'Perfeito para empresas, MEIs e profissionais',
         description:
             'Atendemos desde MEIs e autônomos até empresas e profissionais liberais como advogados e médicos.',
     },
@@ -36,6 +48,12 @@ const benefits = [
         title: 'Evite comprar o certificado errado',
         description:
             'Orientação antes da compra para você não gastar com um certificado que não atende ao seu objetivo.',
+    },
+    {
+        icon: Clock,
+        title: 'Acompanhamento até o certificado pronto',
+        description:
+            'Seguimos ao seu lado da escolha à instalação, até o certificado estar funcionando corretamente.',
     },
 ];
 

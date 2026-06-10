@@ -1,27 +1,12 @@
 'use client';
 
-import { ArrowRight, HelpCircle, HardDrive, Cloud } from 'lucide-react';
+import { ArrowRight, HelpCircle } from 'lucide-react';
 import { CERTIFICATES, buildWhatsAppUrl } from './site-config';
 import { trackEvent } from './analytics';
 
-const models = [
-    {
-        icon: HardDrive,
-        title: 'A1 — arquivo digital',
-        description:
-            'Instalado no computador, sem mídia física. Prático para o dia a dia, com validade de 1 ano.',
-    },
-    {
-        icon: Cloud,
-        title: 'A3 — token ou cartão',
-        description:
-            'Armazenado em mídia física, com mais portabilidade e validade de até 3 anos.',
-    },
-];
-
 const PricingCards = () => {
     const goToQuiz = () => {
-        trackEvent('click_quiz_start', { source: 'pricing_card' });
+        trackEvent('click_unknown_certificate', { source: 'pricing_cards' });
         document.getElementById('quiz')?.scrollIntoView({ behavior: 'smooth' });
     };
 
@@ -111,25 +96,6 @@ const PricingCards = () => {
                     </div>
                 </div>
 
-                {/* A1 vs A3 */}
-                <div className="mt-6 grid gap-6 md:grid-cols-2">
-                    {models.map((model) => (
-                        <div
-                            key={model.title}
-                            className="flex items-start gap-5 rounded-3xl border border-brand-100 bg-white p-7"
-                        >
-                            <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-brand-50 text-brand-600">
-                                <model.icon size={24} />
-                            </span>
-                            <div>
-                                <h3 className="text-lg font-bold text-slate-900">{model.title}</h3>
-                                <p className="mt-2 text-sm leading-relaxed text-slate-600">
-                                    {model.description}
-                                </p>
-                            </div>
-                        </div>
-                    ))}
-                </div>
             </div>
         </section>
     );

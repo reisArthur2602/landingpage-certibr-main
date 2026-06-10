@@ -22,8 +22,8 @@ export function buildWhatsAppUrl(message: string): string {
 
 // Mensagens prontas reutilizáveis.
 export const WHATSAPP_MESSAGES = {
-    default: 'Olá, preciso de ajuda com certificado digital.',
-    heroBuy: 'Olá, quero comprar um certificado digital. Pode me ajudar a escolher e emitir?',
+    default: 'Olá, preciso de ajuda com Certificado Digital A1.',
+    heroBuy: 'Olá, quero comprar um Certificado Digital A1. Pode me ajudar a escolher e emitir?',
 } as const;
 
 // URL padrão (botões genéricos: header, CTA final, rodapé).
@@ -58,7 +58,7 @@ export const CERTIFICATES: Certificate[] = [
         badge: 'Empresas',
         price: 'Consultar valor',
         description:
-            'Ideal para empresas que precisam emitir nota fiscal, acessar a Receita Federal/e-CAC e assinar documentos.',
+            'Ideal para empresas que precisam emitir nota fiscal, acessar Receita Federal/e-CAC e assinar documentos.',
         whatsappMessage:
             'Olá, tenho interesse no certificado e-CNPJ A1. Pode me passar valores e documentos necessários?',
         highlight: true,
@@ -68,26 +68,29 @@ export const CERTIFICATES: Certificate[] = [
         name: 'e-CPF A1',
         badge: 'Pessoa física',
         price: 'Consultar valor',
-        description: 'Ideal para pessoa física, advogados, médicos e profissionais liberais.',
+        description:
+            'Ideal para pessoa física, profissionais liberais, advogados, médicos e representantes legais.',
         whatsappMessage:
             'Olá, tenho interesse no certificado e-CPF A1. Pode me passar valores e documentos necessários?',
     },
     {
-        id: 'ecnpj-a3',
-        name: 'e-CNPJ A3',
-        badge: 'Token / cartão',
+        id: 'nfe-a1',
+        name: 'NF-e A1',
+        badge: 'Nota Fiscal',
         price: 'Consultar valor',
-        description: 'Certificado em token ou cartão para empresas que precisam de mídia física.',
+        description:
+            'Ideal para emissão de notas fiscais eletrônicas em sistemas de gestão, ERPs e plataformas contábeis.',
         whatsappMessage:
-            'Olá, tenho interesse no certificado e-CNPJ A3. Pode me passar valores e documentos necessários?',
+            'Olá, tenho interesse no Certificado NF-e A1 para emissão de notas fiscais. Pode me orientar?',
     },
     {
-        id: 'ecpf-a3',
-        name: 'e-CPF A3',
-        badge: 'Token / cartão',
+        id: 'renovacao-a1',
+        name: 'Renovação A1',
+        badge: 'Renovação',
         price: 'Consultar valor',
-        description: 'Certificado em token ou cartão para pessoa física e profissionais.',
+        description:
+            'Para quem já possui certificado digital vencido ou próximo do vencimento. Processo rápido e simples.',
         whatsappMessage:
-            'Olá, tenho interesse no certificado e-CPF A3. Pode me passar valores e documentos necessários?',
+            'Olá, preciso renovar meu Certificado Digital A1. Pode me ajudar?',
     },
 ];

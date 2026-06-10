@@ -7,7 +7,9 @@ export type AnalyticsEvent =
     | 'click_quiz_start'
     | 'submit_quiz_whatsapp'
     | 'click_certificate_card'
-    | 'click_whatsapp_floating';
+    | 'click_whatsapp_floating'
+    | 'click_final_cta'
+    | 'click_unknown_certificate';
 
 interface AnalyticsWindow {
     gtag?: (...args: unknown[]) => void;

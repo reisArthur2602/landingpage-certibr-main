@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { trackEvent } from './analytics';
 import { buildWhatsAppUrl } from './site-config';
 
-type StepKey = 'uso' | 'tipo' | 'preferencia' | 'urgencia';
+type StepKey = 'tipo' | 'uso' | 'situacao' | 'urgencia';
 
 interface QuizStep {
     key: StepKey;
@@ -15,31 +15,31 @@ interface QuizStep {
 
 const QUIZ_STEPS: QuizStep[] = [
     {
+        key: 'tipo',
+        question: 'O certificado será para quem?',
+        options: ['Empresa / CNPJ', 'Pessoa física / CPF', 'Não sei'],
+    },
+    {
         key: 'uso',
-        question: 'Você precisa do certificado para quê?',
+        question: 'Você precisa para quê?',
         options: [
             'Emitir nota fiscal',
-            'Assinar documentos',
             'Acessar Receita Federal / e-CAC',
+            'Assinar documentos',
             'Meu contador pediu',
-            'Sou advogado/médico/profissional liberal',
+            'Renovar certificado vencido',
             'Não sei',
         ],
     },
     {
-        key: 'tipo',
-        question: 'O certificado é para CPF ou CNPJ?',
-        options: ['CPF', 'CNPJ', 'Não sei'],
-    },
-    {
-        key: 'preferencia',
-        question: 'Você prefere qual tipo?',
-        options: ['A1 — arquivo digital', 'A3 — token/cartão', 'Quero ajuda para escolher'],
+        key: 'situacao',
+        question: 'Você já teve certificado digital antes?',
+        options: ['Sim, quero renovar', 'Não, será o primeiro', 'Não sei'],
     },
     {
         key: 'urgencia',
         question: 'Qual sua urgência?',
-        options: ['Preciso hoje', 'Preciso essa semana', 'Só estou pesquisando'],
+        options: ['Preciso hoje', 'Preciso essa semana', 'Estou pesquisando'],
     },
 ];
 
@@ -74,11 +74,11 @@ const CertificateQuiz = () => {
         const lines = [
             `Olá! Me chamo ${name.trim()} e vim pelo site da certiBR. 😊`,
             '',
-            'Preenchi o teste rápido e gostaria de ajuda para escolher o certificado certo:',
+            'Preciso de ajuda com Certificado Digital A1. Preenchi o teste rápido:',
             '',
-            `📌 Para que vou usar: ${answers.uso ?? '-'}`,
-            `🏢 É para: ${answers.tipo ?? '-'}`,
-            `💾 Prefiro: ${answers.preferencia ?? '-'}`,
+            `🏢 Certificado para: ${answers.tipo ?? '-'}`,
+            `📋 Vou usar para: ${answers.uso ?? '-'}`,
+            `📄 Situação: ${answers.situacao ?? '-'}`,
             `⏰ Urgência: ${answers.urgencia ?? '-'}`,
             '',
             `📱 Meu WhatsApp: ${phone.trim()}`,
@@ -95,7 +95,7 @@ const CertificateQuiz = () => {
     return (
         <section
             id="quiz"
-            className="scroll-mt-20 bg-gradient-to-br from-brand-700 to-brand-900 py-20 lg:py-28"
+            className="scroll-mt-20 bg-linear-to-br from-brand-700 to-brand-900 py-20 lg:py-28"
         >
             <div className="mx-auto max-w-3xl px-5 sm:px-8">
                 <div className="text-center">
@@ -104,7 +104,7 @@ const CertificateQuiz = () => {
                         Teste rápido e gratuito
                     </span>
                     <h2 className="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-                        Descubra qual certificado você precisa em 30 segundos
+                        Descubra qual Certificado A1 você precisa em 30 segundos
                     </h2>
                     <p className="mt-3 text-lg text-brand-100/85">
                         Responda algumas perguntas rápidas e receba orientação pelo WhatsApp.

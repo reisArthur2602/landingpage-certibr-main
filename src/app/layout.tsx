@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Sora, Inter } from 'next/font/google';
+import { Inter, Sora } from 'next/font/google';
 import './globals.css';
 
 // Sora (variável) para títulos — tom tech/SaaS. Usada com pesos 600/700.
@@ -22,22 +22,22 @@ export const metadata: Metadata = {
     metadataBase: new URL(baseUrl),
 
     title: {
-        default: 'Certificado Digital A1 e A3 com Suporte | certiBR',
+        default: 'Certificado Digital A1 com Suporte | certiBR',
         template: '%s | certiBR',
     },
 
     description:
-        'Compre certificado digital A1, A3, e-CNPJ ou e-CPF com orientação completa, atendimento pelo WhatsApp e suporte na instalação.',
+        'Compre Certificado Digital A1, e-CNPJ A1, e-CPF A1 ou NF-e A1 com orientação completa, atendimento pelo WhatsApp e suporte na instalação.',
 
     keywords: [
-        'certificado digital',
-        'e-CNPJ',
-        'e-CPF',
         'certificado digital A1',
-        'certificado digital A3',
+        'e-CNPJ A1',
+        'e-CPF A1',
+        'NF-e A1',
+        'certificado digital',
         'emissão certificado digital',
         'certificado digital para empresa',
-        'NF-e certificado',
+        'renovação certificado digital',
         'ICP-Brasil',
         'assinatura digital',
         'certiBR',
@@ -55,9 +55,9 @@ export const metadata: Metadata = {
         type: 'website',
         url: '/',
         siteName: 'certiBR',
-        title: 'Certificado Digital A1 e A3 com Suporte | certiBR',
+        title: 'Certificado Digital A1 com Suporte | certiBR',
         description:
-            'Compre certificado digital A1, A3, e-CNPJ ou e-CPF com orientação completa, atendimento pelo WhatsApp e suporte na instalação.',
+            'Compre Certificado Digital A1, e-CNPJ A1, e-CPF A1 ou NF-e A1 com orientação completa, atendimento pelo WhatsApp e suporte na instalação.',
         locale: 'pt_BR',
         images: [
             {
@@ -71,9 +71,9 @@ export const metadata: Metadata = {
 
     twitter: {
         card: 'summary_large_image',
-        title: 'Certificado Digital A1 e A3 com Suporte | certiBR',
+        title: 'Certificado Digital A1 com Suporte | certiBR',
         description:
-            'Compre certificado digital A1, A3, e-CNPJ ou e-CPF com orientação completa, atendimento pelo WhatsApp e suporte na instalação.',
+            'Compre Certificado Digital A1, e-CNPJ A1, e-CPF A1 ou NF-e A1 com orientação completa, atendimento pelo WhatsApp e suporte na instalação.',
         images: ['/og-image.png'],
     },
 
@@ -101,10 +101,7 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html
-            lang="pt-BR"
-            className={`${sora.variable} ${inter.variable} h-full antialiased`}
-        >
+        <html lang="pt-BR" className={`${sora.className} ${inter.className} h-full antialiased`}>
             <body>{children}</body>
         </html>
     );

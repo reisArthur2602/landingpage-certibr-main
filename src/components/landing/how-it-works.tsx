@@ -10,9 +10,9 @@ const steps = [
     },
     {
         icon: Search,
-        title: 'Identificamos o certificado ideal',
+        title: 'Identificamos o Certificado A1 ideal',
         description:
-            'Analisamos a sua necessidade e indicamos o tipo certo: e-CNPJ, e-CPF, A1 ou A3.',
+            'Analisamos a sua necessidade e indicamos o tipo certo: e-CNPJ A1, e-CPF A1 ou NF-e A1.',
     },
     {
         icon: FileText,

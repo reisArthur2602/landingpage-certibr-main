@@ -1,5 +1,6 @@
 import Header from '@/components/landing/header';
 import Hero from '@/components/landing/hero';
+import AudienceSection from '@/components/landing/audience-section';
 import CertificateQuiz from '@/components/landing/certificate-quiz';
 import PricingCards from '@/components/landing/pricing-cards';
 import HowItWorks from '@/components/landing/how-it-works';
@@ -16,6 +17,7 @@ const LandingPage = () => {
             <Header />
             <main>
                 <Hero />
+                <AudienceSection />
                 <CertificateQuiz />
                 <PricingCards />
                 <HowItWorks />

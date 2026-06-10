@@ -27,13 +27,13 @@ const Hero = () => {
 
                     <h1 className="mt-6 text-4xl font-bold leading-[1.1] tracking-tight text-slate-900 sm:text-5xl lg:text-[3.3rem]">
                         Certificado Digital{' '}
-                        <span className="text-brand-600">A1 e A3</span> com orientação completa
-                        até a emissão
+                        <span className="text-brand-600">A1</span> com orientação completa até a
+                        emissão
                     </h1>
 
                     <p className="mt-5 max-w-xl text-lg leading-relaxed text-slate-600">
-                        Ajudamos você a escolher, comprar e instalar o certificado ideal para sua
-                        empresa ou profissão, sem complicação.
+                        Ajudamos você a escolher, comprar e instalar o Certificado Digital A1 ideal
+                        para sua empresa ou profissão, sem complicação.
                     </p>
 
                     <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -45,7 +45,7 @@ const Hero = () => {
                             className="inline-flex items-center justify-center gap-2 rounded-full bg-brand-600 px-7 py-4 text-base font-semibold text-white shadow-lg shadow-brand-600/25 transition-all hover:bg-brand-700 hover:shadow-xl hover:shadow-brand-600/30"
                         >
                             <MessageCircle size={19} />
-                            Quero comprar pelo WhatsApp
+                            Quero meu Certificado A1
                         </a>
                         <button
                             type="button"
@@ -53,7 +53,7 @@ const Hero = () => {
                             className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-200 bg-white px-7 py-4 text-base font-semibold text-slate-700 transition-colors hover:border-brand-300 hover:text-brand-700"
                         >
                             <HelpCircle size={19} />
-                            Não sei qual certificado preciso
+                            Não sei qual A1 preciso
                         </button>
                     </div>
 
